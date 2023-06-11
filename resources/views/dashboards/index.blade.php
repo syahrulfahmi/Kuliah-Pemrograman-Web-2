@@ -91,5 +91,4 @@ lineSmooth: true,
 new Chartist.Bar('#bar-chart', data, options);
 });
 </script>
-
 @stop
