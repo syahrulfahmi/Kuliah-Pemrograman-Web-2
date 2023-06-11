@@ -18,6 +18,8 @@
                         </div>
                         @endif
                         <a href="/siswa/export-excel" class="btn btn-success btn-sm" target="_blank">Excel</a>
+                        <a href="/siswa/export-pdf" class="btn btn-danger btn-sm" target="_blank"> Download PDF</a>
+                        <a href="/siswa/pdf" class="btn btn-danger btn-sm" target="_blank"> Open PDF</a>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
