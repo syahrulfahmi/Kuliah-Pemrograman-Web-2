@@ -8,7 +8,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Data Siswa</h3>
                         <div class="right">
-                            <button type="button" class="btn" data-toggle="modal" data-target="#tambahData">Tambah Data Siswa</button> 
+                            <button type="button" class="btn" data-toggle="modal" data-target="#tambahData">Tambah Data Siswa</button>
                         </div>
                     </div>
                     <div class="panel-body">
@@ -17,9 +17,27 @@
                             {{session('sukses')}}
                         </div>
                         @endif
+                        
+                        <!-- Search -->
+                        <form class="" style="margin-bottom: 10px;" action="{{ route('search.siswa') }}" method="GET">
+                            <div class="input-group">
+                                <input type="text" name="search_nama" class="form-control" placeholder="Search siswa...">
+                                <span class="input-group-btn"><button type="submit" class="btn btn-primary">Go</button></span>
+                            </div>
+                        </form>
+                        <!--Link href  -->
                         <a href="/siswa/export-excel" class="btn btn-success btn-sm" target="_blank">Excel</a>
                         <a href="/siswa/export-pdf" class="btn btn-danger btn-sm" target="_blank"> Download PDF</a>
                         <a href="/siswa/pdf" class="btn btn-danger btn-sm" target="_blank"> Open PDF</a>
+                        
+                        <!-- button function -->
+                        <form action="/siswa/descending" style="float: right;">
+                            <button type="submit" class="btn btn-primary">descending</button>
+                        </form>
+                        <form action="/siswa/ascending" style="float: right;padding:0px 5px 0px 0px;">
+                            <button type="submit" class="btn btn-primary">Ascending</button>
+                        </form>
+                        
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -50,7 +68,7 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                        </table> 
+                        </table>
                     </div>
                 </div>
                 <!-- Modal -->
@@ -68,15 +86,13 @@
                                     {{csrf_field()}}
                                     <div class="form-group">
                                         <label for="nama_depan">Nama Depan</label>
-                                        <input type="text" class="form-control" name="nama_depan" 
-                                        id="nama_depan" aria-describedby="nama_depan" placeholder="Nama Depan">
+                                        <input type="text" class="form-control" name="nama_depan" id="nama_depan" aria-describedby="nama_depan" placeholder="Nama Depan">
                                         <span class="text-danger">{{ $errors->first('nama_depan') 
                                         }}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="nama_belakang">Nama Belakang</label>
-                                        <input type="text" class="form-control" name="nama_belakang" 
-                                        id="nama_belakang" aria-describedby="nama_belakang" placeholder="Nama Belakang">
+                                        <input type="text" class="form-control" name="nama_belakang" id="nama_belakang" aria-describedby="nama_belakang" placeholder="Nama Belakang">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>
@@ -85,41 +101,46 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="no_telp">No Telp</label>
-                                        <input type="text" class="form-control" name="no_telp" id="no_telp" 
-                                        aria-describedby="no_telp" placeholder="Nomor Telepon">
+                                        <input type="text" class="form-control" name="no_telp" id="no_telp" aria-describedby="no_telp" placeholder="Nomor Telepon">
                                         <span class="text-danger">{{ $errors->first('no_telp') }}</span>
                                     </div>
                                     <div class="form-group">
                                         <label for="jenis_kelamin">Pilih Jenis Kelamin</label>
-                                        <select class="form-control" name="jenis_kelamin" 
-                                        id="jenis_kelamin">
-                                        <option value="L">Laki-laki</option>
-                                        <option value="P">Perempuan</option>
-                                    </select>
+                                        <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+                                            <option value="L">Laki-laki</option>
+                                            <option value="P">Perempuan</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="jenis_kelamin">Pilih Jenis Kelamin</label>
+                                        <select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+                                            <option value="L">Laki-laki</option>
+                                            <option value="P">Perempuan</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="agama">Agama</label>
+                                        <input type="text" class="form-control" name="agama" id="agama" aria-describedby="nama_depan" placeholder="Agama">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="alamat">Alamat</label>
+                                        <textarea class="form-control" name="alamat" id="alamat" rows="3"></textarea>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="agama">Agama</label>
-                                    <input type="text" class="form-control" name="agama" id="agama" aria-describedby="nama_depan" placeholder="Agama">
-                                </div> 
-                                <div class="form-group">
-                                    <label for="alamat">Alamat</label>
-                                    <textarea class="form-control" name="alamat" id="alamat" rows="3"></textarea>
+                                <div class="alert alert-success d-none" id="msg_div">
+                                    <span id="res_message"></span>
                                 </div>
+                                <div class="modal-footer">
+                                    <button onclick="location.reload();" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" id="send_form" class="btn btn-primary">Submit</button>
+                                </form>
                             </div>
-                            <div class="alert alert-success d-none" id="msg_div">
-                                <span id="res_message"></span>
-                            </div>
-                            <div class="modal-footer">
-                                <button onclick="location.reload();" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" id="send_form" class="btn btn-primary">Submit</button>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -137,15 +158,15 @@
                 },
                 no_telp: {
                     required: true,
-                    digits:true,
+                    digits: true,
                     minlength: 10,
-                    maxlength:13,
+                    maxlength: 13,
                 },
                 email: {
                     required: true,
                     maxlength: 50,
                     email: true,
-                }, 
+                },
             },
             messages: {
                 nama_depan: {
@@ -168,21 +189,21 @@
             submitHandler: function(form) {
                 $('#send_form').html('Sending..');
                 $.ajax({
-                    url: "/siswa/create" ,
+                    url: "/siswa/create",
                     type: "POST",
                     data: $('#siswa_form').serialize(),
-                    success: function( response ) {
+                    success: function(response) {
                         $('#send_form').html('Submit');
                         $('#msg_div').show();
                         $('#res_message').show();
                         $('#res_message').html(response.msg);
                         $('#msg_div').removeClass('d-none');
-                        document.getElementById("siswa_form").reset(); 
-                        setTimeout(function(){
+                        document.getElementById("siswa_form").reset();
+                        setTimeout(function() {
                             $('#msg_div').hide();
                             $('#res_message').hide();
                             location.reload();
-                        },5000);
+                        }, 5000);
                     }
                 });
             }

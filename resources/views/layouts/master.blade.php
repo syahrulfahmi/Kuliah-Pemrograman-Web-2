@@ -56,6 +56,8 @@
     <script src="{{asset('admin/assets/vendor/chartist/js/chartist.min.js')}}"></script>
     <script src="{{asset('admin/assets/scripts/klorofil-common.js')}}"></script>
 
+    @yield('footer')
+
     <!-- from search -->
     <script src="path/to/jquery.js"></script>
     <script src="path/to/chartist.js"></script>

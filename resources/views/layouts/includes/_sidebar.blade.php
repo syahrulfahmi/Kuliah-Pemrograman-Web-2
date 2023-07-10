@@ -6,8 +6,9 @@
                         <span>Dashboard</span></a></li>
                 <li><a href="/siswa" class=""><i class="lnr lnr-user"></i>
                         <span>Siswa</span></a></li>
-                <li><a href="/mat-pel" class=""><i class="lnr lnr-book"></i> <span>Mata
+                <li><a href="/mapel" class=""><i class="lnr lnr-book"></i> <span>Mata
                             Pelajaran</span></a></li>
+                <li><a href="/informasi" class=""><i class="lnr lnr-book"></i> <span>Informasi</span></a></li>
             </ul>
         </nav>
     </div>

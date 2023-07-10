@@ -6,14 +6,16 @@
             <div class="row">
                 <div class="panel">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Information Period: {{date('d-m-Y') }}</h3>
+                        <h3 class="panel-title">Information:
+                            {{$data_informasi->created_at}}
+                        </h3>
                         <div class="right">
                             <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
                             <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <p>Informasi Sekolah.</p>
+                        <p>{{$data_informasi->informasi}}</p>
                     </div>
                 </div>
                 <div class="panel">
@@ -28,7 +30,7 @@
                                 <div class="metric">
                                     <span class="icon"><i class="lnr lnr-user"></i></span>
                                     <p>
-                                        <span class="number">1,252</span>
+                                        <span class="number">{{$data_siswa->count()}}</span>
                                         <span class="title">Total Siswa</span>
                                     </p>
                                 </div>
@@ -45,7 +47,7 @@
                                 </a>
                             </div>
                             <div class="col-md-3">
-                                <a href="/mat-pel">
+                                <a href="/mapel">
                                     <div class="metric">
                                         <span class="icon"><i class="lnr lnr-book"></i></span>
                                         <p>
@@ -58,7 +60,8 @@
                         </div>
                         <div class="row">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Data Grafik Siswa</h3>
+                                <h3 class="panel-title">Data
+                                    Grafik Siswa</h3>
                             </div>
                             <div class="panel-body">
                                 <div id="bar-chart" class="ct-chart"></div>
@@ -72,12 +75,12 @@
 </div>
 <script>
 $(function() {
-    var options;
-    var data = {
-    labels: {!! json_encode($jml_siswa['category']) !!},
-    series: [
-    {!! json_encode($jml_siswa['series']) !!},
-    ]
+var options;
+var data = {
+labels: {!! json_encode($jml_siswa['category']) !!},
+series: [
+{!! json_encode($jml_siswa['series']) !!},
+]
 };
 // line chart
 options = {
